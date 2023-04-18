@@ -1,0 +1,39 @@
+
+***Scrape full driver lists and set a value for FIA precious metals ratings
+
+***Add a new calculated column showing the rolling 5-lap average for each driver
+	If the driver has not yet done 5 consecutive laps in a stint show average of the completed laps
+	for the first lap of a stint would simply report laptime.
+		to match original datset avg_5 data should be stored in both '01:33.270' format and raw seconds '93.270' format
+		ML will only use raw seconds format, full format is kepped for other analysis
+	
+
+
+***Predict a drivers fia metal rating based on available dataset/cluster drivers based on available data
+	Assess and grade the performabnce of the precious metals rating system
+		do the ratings do an effective job of grouping drivers based on pace/performance
+			
+	Track the progression of key drivers throught the ranks
+		Has anyone climbed from Bronze to Platinum (surely not) or Gold?
+
+	What is the better arangement of a pro-am line-up?
+		B,B,G?
+		B,S,S?
+		Other options allowed?
+
+*** Examine safety car/FCY strategies
+
+*** What most determines a winner 
+	Fastest possible speed vs most consistent pace vs time spent in pits
+	
+	
+*** Driver pace drop-off/variance over multiple stints, over consecutive stints, pro vs am differences
+	Try to account for other factors like time of day, close battle.
+
+*** How close is the racing? What class has the most close racing.
+	How many on track passes for position per class?
+		How has that changed overtime?
+		Difference in LMP2 generations?
+
+*** SQL Analysis for general stats...
+	
