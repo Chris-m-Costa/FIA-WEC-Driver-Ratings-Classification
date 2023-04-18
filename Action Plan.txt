@@ -1,0 +1,103 @@
+Done: 
+	Alter the 'season' column into a simple year column. 2018, 2019, 2020 ran as only two seasons running through winter 
+		(it was a silly idea by the series, exasperated by covid and then abandoned)
+			Ill have to do this semi-manually as calendar dates are not in the data
+			This conversion wil make it easier to apply and interpret the driver ratings as those are updated by calendar year independent of WEC seasons
+
+	Scrape entry list pdfs to get FIA precious metal ratings for each driver/season
+		Use Tabula-py (wraper for Tabula_Java) to scrape the entrylist pdfs found on WEC.alkamael portal
+	
+	Insert Driver Ratings Column to dataset
+		*** The column has been added but many drivers not working r spellIng or other problems. Can either replace manually by dict or try NLP methods (look into later)
+
+		
+
+	Add a new calculated column showing the rolling 5-lap average for each driver stint
+		If the driver has not yet done 5 consecutive laps in a stint show average of the completed laps
+			For the first lap of a stint would simply report the laptime.
+				To match original datset avg_5 data should be stored in both '01:33.270' format and raw seconds '93.270' format
+					(ML will only use raw seconds format, full format is kept for other analysis)
+
+	ML Data Cleaning/Feature Selection:
+
+		Select columns to keep and to drop
+			dropped: ['car_number', 'lap_number', 'driver_number', 'lap_time', 'elapsed', 'hour', 's1_large', 's2_large', 's3_large', 'driver_name', 'pit_time', 'group', 'team', 'manufacturer', 'season', 'vehicle', 							'team_no','lap_time_ms', 'engine', 'driver_stint',  'team_stint', 'team_stint_no', 'interval_ms', 'interval', 'elapsed_ms', 'position', 'gap', 'elapsed_s']
+				
+          	Drop years without driver ratings (older than 2017)
+
+		
+
+
+	
+	
+
+Finish no later than thurs 4/13:
+
+
+
+	Data Cleaning/Feature Selection:
+		
+		Check for na and determine how to handle based on data type
+
+
+	
+		
+
+
+Finish before Sat Lunch 4/15:
+	Checking colinearity
+	Data Scaling/Transformation operations
+	Data Encoding operations (as needed)
+	
+
+
+Before Monday 4/17:
+	Fit and evaluate ML model	
+		Predict a drivers fia metal rating based on available dataset/cluster drivers based on available data
+			Assess and grade the performabnce of the precious metals rating system
+			do the ratings do an effective job of grouping drivers based on pace/performance
+
+
+
+Finish by eod Wed 4/19 :
+
+	Place any functions into a local library file with an __int__.py
+
+
+	Additional analysis/Evaluation Ideas: (as time allows)
+
+		Track the progression of key drivers throught the driver rating system
+			Has anyone climbed from Bronze to Platinum (surely not) or Gold?
+		
+		What is the better arangement of a pro-am line-up? B,B,G? B,S,S? Other options allowed?
+		
+		Examine safety car/FCY strategies
+	
+		What most determines a winner?
+			Fastest possible speed vs most consistent pace vs time spent in pits
+	
+		Driver pace drop-off/variance over multiple stints, over consecutive stints, pro vs am differences
+			Try to account for other factors like time of day, close battle etc.
+
+		How close is the racing? What class has the most close racing.
+			How many on track passes for position per class?
+				How has that changed overtime?
+				Difference in LMP2 generations?
+	
+		GTE-Pro BoP Analysis:
+			Over the long scale of the data how effective was the BoP at averaging performance between cars?
+				Std Dev of laptimes between competing cars for a given race meeting
+					Probably average 
+
+		SQL Analysis for general stats...
+		
+		Store Functions in library
+
+		Add additional data from 2022/2023 to set
+
+
+
+
+Start working on Presentation by EoD Thursday 4/20
+	
+	
