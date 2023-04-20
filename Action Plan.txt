@@ -2,7 +2,7 @@ Done:
 	Alter the 'season' column into a simple year column. 2018, 2019, 2020 ran as only two seasons running through winter 
 		(it was a silly idea by the series, exasperated by covid and then abandoned)
 			Ill have to do this semi-manually as calendar dates are not in the data
-			This conversion wil make it easier to apply and interpret the driver ratings as those are updated by calendar year independent of WEC seasons
+			This conversion wilol make it easier to apply and interpret the driver ratings as those are updated by calendar year independent of WEC seasons
 
 	Scrape entry list pdfs to get FIA precious metal ratings for each driver/season
 		Use Tabula-py (wraper for Tabula_Java) to scrape the entrylist pdfs found on WEC.alkamael portal
@@ -26,18 +26,30 @@ Done:
           	Drop years without driver ratings (older than 2017)
 
 		
-
-
 	
-	
-
-Finish no later than thurs 4/13:
-
-
-
 	Data Cleaning/Feature Selection:
 		
 		Check for na and determine how to handle based on data type
+		
+		Calculate IQR and remove outlier lap_time data
+
+
+	Data Scaling/Transformation operations:
+		Testing several scaling options to fin the optimal values for moel accuracy
+		
+		Data Encoding operations (as needed):
+			Use pd.getdummies on circuit and class columns
+	
+
+	Fit and evaluate ML model	
+		Predict a drivers fia metal rating based on available dataset/cluster drivers based on available data.
+		
+			Fit and hyper train KNN and RandomForest classifier models
+			
+			
+
+
+
 
 
 	
@@ -46,14 +58,12 @@ Finish no later than thurs 4/13:
 
 Finish before Sat Lunch 4/15:
 	Checking colinearity
-	Data Scaling/Transformation operations
-	Data Encoding operations (as needed)
+	
 	
 
 
 Before Monday 4/17:
-	Fit and evaluate ML model	
-		Predict a drivers fia metal rating based on available dataset/cluster drivers based on available data
+	
 			Assess and grade the performabnce of the precious metals rating system
 			do the ratings do an effective job of grouping drivers based on pace/performance
 

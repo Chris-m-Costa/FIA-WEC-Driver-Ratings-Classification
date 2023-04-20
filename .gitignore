@@ -1,3 +1,6 @@
 
 # Ignore checkpoint files
 **/checkpoints
+
+#Ignore testing notebook
+**/testing
