@@ -68,6 +68,8 @@ The percentage of Nan values in all columns was checked as well the the percenta
 
 Next the data is checked for outliers in the laptime data. First the shortest laptime existing in the data was checked to ensure that it was a realistic time and not some errant value of an impossibly short lap. Then the IQR (inter-quartile range) was calculated and an upper limit was set; all laptimes above this limit are removed. In this process the data was grouped by both circuit and class as laptimes vary by several minutes between the longest and shortest circuits. The record containing the remaining longest laptime is checked to ensure that we are not dropping to many values from the data; the longest remaining is 261 seconds or a laptime of 4:35.000 for a GTE at Le Mans, a slow lap to be sure but not one that indicates an artificial delay (such as a significant accident).
 
+### Transforming and Encoding
+
 The data is now split into several DataFrames separating the continuous and discrete numerical columns, the object value columns, and the target data columns to allow for transformations and encoding. Each of the feature columns will be re-joined together at a later step in the process. 
 
 The object columns are one-hot encoded using the pandas get_dummies() function which adds a new column for each unique value in the original column. A value of 1 is entered for rows where the the column value is present, and the other 'dummy' columns are filled with a 0 value for that row. The .get_dummies()/OneHotEncoder method can lead to dimensionaility issues in some datasets where there are many unique values in encoded columns; in our case with only 5 possible classes and 12 different circuits the number of new columns created is acceptable. 
@@ -75,4 +77,34 @@ The object columns are one-hot encoded using the pandas get_dummies() function w
 The continuous numerical features are scaled to allow the ML models to more accurately interpret the values.  When feature columns have different scales, the features with larger scales can be interpreted by the model to have a greater importance and a greater impact on the model output. This can result in biased model performance and lead to poor model accuracy.
 In an attempt to find the best posible scaling method for our puposes we have devised a function to apply several different methods (MinMaxScaler, Stadard Scaler, and MaxABSScaler) and return a list (scales) of the three diferent scaled DataFrames. 
 The discrete numerical features require no transformations and can be left alone to be concatenated with the encoded and scaled data. At this point we will concatenate the features using the StandardScaled data for baseline model testing purposes.
+
+### Fitting and Evaluating Models
+
+With the initially assembled features DataFrame we will next perform a train_test_split function. This will divide randomly both the feature and target DataFrames into sets for training the model and a set for testing the accuracy of the model. In this case we have used the default values which reserves 25% of the data for the testing set, the remaining 75% will be used for training the model. The train_test function is used with the random_state argument which controls the random shuffling of the data when splitting. Using the same random_state value will ensure that subsequent splitting operations (such as when we test the models with other versions of the scaled data) will result in the same selection of records going to each side of the split. This will alow for accurate comparison of multiple model runs as they will be trained and tested on the same selections of data.
+
+In this project we will be testing two different classification algorithims; the Random Forest Classifier (RFC) and the K Nearest Neighbors Classifier (KNN). 
+The Random Forest classifier is an ensemble learning method that creates multiple decision trees, each trained on a random subset of the training data. The predictions of the model are based on the most popular result across all of the individual trees in the ensemble.
+The K Nearest Neighbors classifier works by grouping data points based on the K value of nearest neighboring points. The classifier operates on a distance metric to determine the similarity between data points.
+
+The next step we have taken is fitting an initial run of both model types with default model hyperparameters and using the initial train_test_split we made in the previous step. The scores of these initial runs will inform further steps taken to increase accuracy.
+
+The RFC baseline model returned an accuracy score of 0.8933548182107031 or 89% accurate predictions. The KNN models returns an accuracy sciore of /............................
+
+With the intent to further increase the model accuracy we will perform hyper parameter tuning on both models. Hyper parameter tuning (using the GridSearchCV function) will run multiple iterations of the given model to determine the optimal set of hyperparameters for the model type. The Grid Search function takes a parameter grid argument with a range of values for each of the models hyperparameters and will run a version of the model with each hyperparameter combination. The Grid Search will check the accuracy of each iteration and eventually return a the maximum accuracy score and the specific set of hyper parameters used to attain it. The returned dictionary of hyperparameter values can then be called in further functions to train a final version of our model for eventual production use. 
+
+With our returned sets of Hyperparameter values we can now run our final tests which will lead us to the final version of our model. 
+The test_models_scales function will take as arguments: the scales list containing three versions of scaled continuous features, the models list containing RandomForest and KNeighbors model items, the knn_best_params dictionary, and finally the rfc_best_params dictionary.
+The function will run each model (with its best parameters) once for each of the three scaled data sets and print out the model name and the each scaler name with the reported accuracy score. 
+
+We now have the optimal model type, its optimal parameters, and the scale type that retuns the best possible accuracy for our training data. Using these features we can fit a final version of the modfel for serialization and deployment. This model will be stored and saved to be applied against future data. 
+
+### What we have learned
+
+
+
+
+
+
+
+
 
