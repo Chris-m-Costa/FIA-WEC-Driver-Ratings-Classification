@@ -59,6 +59,15 @@ The column 'crossing_finish_line_in_pit' holds Nan values for any laps that cros
 
 Finally the 'flag_at_fl' column was dropped as data only exists starting with the 2022 season.
 
+
+## The Machine Learning Notebook
+### Data Cleaning
+The data included many columns that would not be useable by our machine learning models; some were eliminated based on redundancy (ex: multiple format version of laptimes and sector times) others based on the type of data not being needed (driver, team, and car manufacturer names for example). All data for years prior to 2017 was also dropped since our target data for these years does not exist.
+
+The percentage of Nan values in all columns was checked as well the the percentage of laps finished in pitlane (commonly known as in-laps). Only small percentages of Nans were found and determine they can be safely dropped from the working data. In theory the in-lap data could be useful to a model. Under normal circumstances an in-lap would be run on old tires, a driver who can run a faster in-lap than their rivals may be able to gain positions or time on a competitor and thus suggests a more skilled driver. However a car that has had an issue on track will also have an abnormally slow in-lap as it limps back to the pitlane. The in-lap data unfortunately complicates the process of trimming outliers from the lap time data and so the choice was taken to drop these records.
+
+Next the data is checked for outliers in the laptime data. First the shortest laptime existing in the data was checked to ensure that it was a realistic time and not some errant value of an impossibly short lap. Then the IQR (inter-quartile range) was calculated and an upper limit was set; all laptimes above this limit are removed. In this process the data was grouped by both circuit and class as laptimes vary by several minutes between the longest and shortest circuits. 
+
                 
 
 
