@@ -6,3 +6,8 @@
 **/testing
 tuning_test.ipynb
 testing.ipynb
+.ipynb_checkpoints/testing-checkpoint.ipynb
+.ipynb_checkpoints/combining_driver_ratings-checkpoint.ipynb
+.ipynb_checkpoints/driver_ratings_ml-checkpoint.ipynb
+.ipynb_checkpoints/feature_engineering-checkpoint.ipynb
+.ipynb_checkpoints/scraping_entry_pdfs-checkpoint.ipynb
